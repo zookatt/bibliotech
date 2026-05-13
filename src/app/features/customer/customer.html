@@ -6,6 +6,9 @@
    [src]="customer.image" alt="">  
   <p>{{customer.fullName}}</p>
   </li> -->
-  <app-customer-item [customer]="customer" (userDeleted)="handleDeletedUser($event)"/>
+  <app-customer-item [customer]="customer" (userDeleted)="handleDeletedUser($event)">
+    <app-button-trash [item]="customer.fullName" (eventEmitted)="handleDeletedUser($event)"/>
+  </app-customer-item>
+  
 }
 </ul>
