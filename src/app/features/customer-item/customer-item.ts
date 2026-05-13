@@ -11,10 +11,10 @@ import { ButtonTrash } from "../../shared/ui/button-trash/button-trash";
 export class CustomerItem {
 
   readonly customer = input.required<ICustomer>();
-    userDeleted = output<string>();
+  userDeleted = output<string>();
 
-  deleteUser(){
-  this.userDeleted.emit(this.customer().fullName);
-}
+  deleteUser() {
+    this.userDeleted.emit(this.customer().fullName);
+  }
 
 }
