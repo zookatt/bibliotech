@@ -1,10 +1,20 @@
+<input type="search" placeholder="search" id="search" [formField]="searchForm.text">
+<p>{{searchForm.text().value()}}</p>
+
 <ul>
-@for(customer of customers; track $index){
+  @for(customer of customers(); track $index){
   <li class="flex mb-8 gap-3">
-  <img
-    class="w-12 h-12 rounded-full object-cover object-center"
-   [src]="customer.image" alt="">  
-  <p>{{customer.fullName}}</p>
+    <app-customer-item 
+      [customer]="customer" 
+      (userDeleted)="handleUserDeleted($event)">
+          <icon-button [item]="customer.fullName" (eventEmitted)="handleUserDeleted($event)">
+            <svg-trash/>
+          </icon-button>
+          <icon-button [item]="customer.fullName" (eventEmitted)="handleUserEdited($event)">
+            <svg-pen/>
+          </icon-button>
+    </app-customer-item>
+
   </li>
-}
+  }
 </ul>
