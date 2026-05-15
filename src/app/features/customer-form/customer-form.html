@@ -1,0 +1,12 @@
+<div formGroupName="form" class="border-2">
+  <h2 class="font-bold">Customer</h2>
+  <label for="fullName">Full Name</label>
+  <input id="fullName" type="text" formControlName="fullName" />
+  <p>Value: {{ form.get('fullName')?.value }}</p>
+  <!-- <label for="city">City: </label>
+    <input id="city" type="text" formControlName="city" />
+    <label for="state">State: </label>
+    <input id="state" type="text" formControlName="state" />
+    <label for="zip">Zip Code: </label>
+    <input id="zip" type="text" formControlName="zip" /> -->
+</div>
