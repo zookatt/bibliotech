@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-customer-form',
@@ -10,7 +10,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class CustomerForm {
   form = new FormGroup({
     fullName: new FormControl(''),
-    email: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl(''),
     phone: new FormControl(''),
     address: new FormControl(''),
     loyalty: new FormControl(''),
@@ -18,5 +18,8 @@ export class CustomerForm {
     image: new FormControl(''),
   });
 
-  
+  onSubmit() {
+    console.log(this.form.value);
+    console.warn(this.form.value);
+  }
 }
