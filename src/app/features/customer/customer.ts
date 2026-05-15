@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CustomerForm } from '../customer-form/customer-form';
 
 export interface CustomerItem {
   fullName: string;
@@ -12,7 +13,7 @@ export interface CustomerItem {
 
 @Component({
   selector: 'app-customer',
-  imports: [],
+  imports: [CustomerForm],
   templateUrl: './customer.html',
   styleUrl: './customer.css',
 })
