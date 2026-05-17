@@ -1,6 +1,6 @@
 import { Component, input, output } from '@angular/core';
 import { ICustomer } from '../interfaces/customer.interface';
-import { ButtonTrash } from "../../shared/ui/button-trash/button-trash";
+
 
 @Component({
   selector: '[app-customer-item]',
