@@ -92,7 +92,7 @@
       </thead>
       <tbody class="divide-y divide-outline-variant">
 
-        @for(customer of customers; track $index){
+        @for(customer of customers(); track $index){
 
         <tr class="hover:bg-surface-container-low transition-colors group" app-customer-item [customer]="customer">
           <div icon-button class="flex justify-end gap-xs" [item]="customer.fullName"
