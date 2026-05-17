@@ -1,12 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { ICustomer } from '../interfaces/customer.interface';
 import { CustomerItem } from '../customer-item/customer-item';
-import { ButtonTrash } from "../../shared/ui/button-trash/button-trash";
-import { ButtonEdit } from '../../shared/ui/button-edit/button-edit';
+import { IconButton } from '../../shared/ui/icon-button/icon-button';
+import { Trash } from '../../shared/ui/icons/trash';
+import { Pen } from '../../shared/ui/icons/pen';
 
 @Component({
   selector: 'app-customer',
-  imports: [CustomerItem, ButtonTrash, ButtonEdit],
+  imports: [CustomerItem, IconButton, Trash,Pen],
   templateUrl: './customer.html',
   styleUrl: './customer.css',
 })
@@ -29,7 +30,7 @@ export class Customer {
       phone: '+1-555-0456',
       address: '45 Oak Ave, Austin, TX',
       loyalty: 'Silver',
-      state: true,
+      state: false,
       image: 'https://i.pravatar.cc/150?img=2',
     },
     {
