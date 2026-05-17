@@ -1,113 +1,33 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { ICustomer } from '../interfaces/customer.interface';
 import { CustomerItem } from '../customer-item/customer-item';
 import { IconButton } from '../../shared/ui/icon-button/icon-button';
 import { customers } from '../../data/customer-data';
+
+import { form, FormField } from '@angular/forms/signals';
 @Component({
   selector: 'app-customer',
-  imports: [CustomerItem, IconButton],
+  imports: [CustomerItem, IconButton,FormField],
   templateUrl: './customer.html',
   styleUrl: './customer.css',
 })
 
 export class Customer {
+  protected readonly customers = signal<ICustomer[]>(customers);
 
-  // customers: ICustomer[] = [
-  //   {
-  //     fullName: 'Emma Johnson',
-  //     email: 'emma.johnson@example.com',
-  //     phone: '+1-555-0123',
-  //     address: '123 Maple St, Springfield, IL',
-  //     loyalty: 'Gold',
-  //     state: true,
-  //     image: 'https://i.pravatar.cc/150?img=1',
-  //   },
-  //   {
-  //     fullName: 'Liam Smith',
-  //     email: 'liam.smith@example.com',
-  //     phone: '+1-555-0456',
-  //     address: '45 Oak Ave, Austin, TX',
-  //     loyalty: 'Silver',
-  //     state: false,
-  //     image: 'https://i.pravatar.cc/150?img=2',
-  //   },
-  //   {
-  //     fullName: 'Olivia Brown',
-  //     email: 'olivia.brown@example.com',
-  //     phone: '+1-555-0789',
-  //     address: '9 Pine Rd, Seattle, WA',
-  //     loyalty: 'Platinum',
-  //     state: true,
-  //     image: 'https://i.pravatar.cc/150?img=3',
-  //   },
-  //   {
-  //     fullName: 'Noah Davis',
-  //     email: 'noah.davis@example.com',
-  //     phone: '+1-555-1011',
-  //     address: '210 Cedar Ln, Denver, CO',
-  //     loyalty: 'Bronze',
-  //     state: true,
-  //     image: 'https://i.pravatar.cc/150?img=4',
-  //   },
-  //   {
-  //     fullName: 'Ava Martinez',
-  //     email: 'ava.martinez@example.com',
-  //     phone: '+1-555-1213',
-  //     address: '77 Birch Blvd, Miami, FL',
-  //     loyalty: 'VIP',
-  //     state: true,
-  //     image: 'https://i.pravatar.cc/150?img=5',
-  //   },
-  //   {
-  //     fullName: 'William Garcia',
-  //     email: 'william.garcia@example.com',
-  //     phone: '+1-555-1415',
-  //     address: '305 Elm St, Portland, OR',
-  //     loyalty: 'Gold',
-  //     state: true,
-  //     image: 'https://i.pravatar.cc/150?img=6',
-  //   },
-  //   {
-  //     fullName: 'Sophia Rodriguez',
-  //     email: 'sophia.rodriguez@example.com',
-  //     phone: '+1-555-1617',
-  //     address: '12 Willow Way, Boston, MA',
-  //     loyalty: 'Silver',
-  //     state: true,
-  //     image: 'https://i.pravatar.cc/150?img=7',
-  //   },
-  //   {
-  //     fullName: 'James Wilson',
-  //     email: 'james.wilson@example.com',
-  //     phone: '+1-555-1819',
-  //     address: '88 Spruce Ct, San Francisco, CA',
-  //     loyalty: 'Platinum',
-  //     state: true,
-  //     image: 'https://i.pravatar.cc/150?img=8',
-  //   },
-  //   {
-  //     fullName: 'Isabella Lee',
-  //     email: 'isabella.lee@example.com',
-  //     phone: '+1-555-2021',
-  //     address: '6 Cherry Cir, Chicago, IL',
-  //     loyalty: 'Gold',
-  //     state: true,
-  //     image: 'https://i.pravatar.cc/150?img=9',
-  //   },
-  //   {
-  //     fullName: 'Benjamin Harris',
-  //     email: 'benjamin.harris@example.com',
-  //     phone: '+1-555-2223',
-  //     address: '420 Aspen Dr, Atlanta, GA',
-  //     loyalty: 'VIP',
-  //     state: true,
-  //     image: 'https://i.pravatar.cc/150?img=10',
-  //   },
-  // ];
-
-  customers = signal<ICustomer[]>(customers);
-  handleDeletedUser(fullName: string) {
+  protected readonly searchForm = form(signal<{searchText:string}>(
+    {searchText:''}
+  ))
+ 
+  protected readonly filterCostumers = computed(()=> {
+    const textToSearch = this.searchForm.searchText().value().toLowerCase();    
+    return this.customers().filter(e=>
+      (e.fullName.toLowerCase().includes(textToSearch) ||
+       e.email.includes(textToSearch))
+      )})
+  protected handleDeletedUser(fullName: string) {
     this.customers.update(() =>
-      this.customers().filter(e => e.fullName !== fullName));
+      this.customers().filter(e => !e.fullName.includes(fullName)));
   }
+
 }
