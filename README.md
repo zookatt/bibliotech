@@ -48,7 +48,7 @@ cd bibliotech
 pnpm install
 ```
 
-### **Paso 2: Generar el Componente Customer**
+### **Paso 2: Generar el Componente CustomerList**
 
 Usa Angular CLI para generar el componente de forma automática:
 
@@ -58,14 +58,14 @@ ng generate component features/customer
 
 Esto creará automáticamente:
 
-- `src/app/features/customer/customer.ts` (componente)
-- `src/app/features/customer/customer.html` (template)
-- `src/app/features/customer/customer.css` (estilos)
-- `src/app/features/customer/customer.spec.ts` (pruebas)
+- `src/app/features/customer/customer-list/customer-list.ts` (componente)
+- `src/app/features/customer/customer-list/customer-list.html` (template)
+- `src/app/features/customer/customer-list/customer-list.css` (estilos)
+- `src/app/features/customer/customer-list/customer-list.spec.ts` (pruebas)
 
 ### **Paso 3: Definir la Interfaz CustomerItem**
 
-En `src/app/features/customer/customer.ts`, añade la interfaz que define la estructura de un cliente:
+En `src/app/features/customer/customer-list/customer-list.ts`, añade la interfaz que define la estructura de un cliente:
 
 ```typescript
 export interface CustomerItem {
@@ -111,11 +111,11 @@ Edita `src/app/app.ts`:
 ```typescript
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Customer } from './features/customer/customer';
+import { CustomerList } from './features/customer/customer-list/customer-list';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Customer], // ← Añade Customer al array imports
+  imports: [RouterOutlet, CustomerList], // ← Añade CustomerList al array imports
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -127,7 +127,7 @@ export class App {}
 En `src/app/app.html`, añade el componente:
 
 ```html
-<app-customer /> <router-outlet />
+<app-customer-list /> <router-outlet />
 ```
 
 ---
@@ -197,11 +197,12 @@ src/
 │   ├── app.html               (template principal)
 │   ├── app.routes.ts          (configuración de rutas)
 │   └── features/
-│       └── customer/          (componente Customer)
-│           ├── customer.ts
-│           ├── customer.html
-│           ├── customer.css
-│           └── customer.spec.ts
+│       └── customer/          (componente CustomerList)
+│           └── customer-list/
+│               ├── customer-list.ts
+│               ├── customer-list.html
+│               ├── customer-list.css
+│               └── customer-list.spec.ts
 ├── main.ts                    (punto de entrada)
 └── styles.css                 (estilos globales)
 ```
@@ -217,9 +218,9 @@ src/
 
 **El componente no aparece en la UI**
 
-- Comprueba que `Customer` está importado en `app.ts`
+- Comprueba que `CustomerList` está importado en `app.ts`
 - Verifica que está añadido en el array `imports` del decorador `@Component`
-- Asegúrate de que la etiqueta `<app-customer/>` está en `app.html`
+- Asegúrate de que la etiqueta `<app-customer-list/>` está en `app.html`
 
 **Error de sintaxis TypeScript**
 
